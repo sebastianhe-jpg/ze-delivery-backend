@@ -12,6 +12,42 @@ from mods.decorator_module import exception_message
 APP = Flask(__name__)
 
 
+@APP.route('/partner-create', methods=['POST'])
+@exception_message
+@cross_origin(cross_origin='*')
+def partner_create():
+    """
+
+    :return:
+    """
+    output, code = partners_view.partner_create(request)
+    return jsonify(output), code
+
+
+@APP.route('/partner-get-by-id', methods=['POST'])
+@exception_message
+@cross_origin(cross_origin='*')
+def partner_get():
+    """
+
+    :return:
+    """
+    output, code = partners_view.partner_get(request)
+    return jsonify(output), code
+
+
+@APP.route('/partner-search', methods=['POST'])
+@exception_message
+@cross_origin(cross_origin='*')
+def partner_search():
+    """
+
+    :return:
+    """
+    output, code = partners_view.partner_search(request)
+    return jsonify(output), code
+
+
 # --------------- main ---------------
 @APP.route('/')
 @exception_message
