@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 # !/usr/bin/env python3
-from geojson import Point
 from geojson import MultiPolygon
+from geojson import Point
+from shapely.geometry import Polygon
+from shapely.geometry import Point as xpoint
 from mods import input_validator_module
 from mods import sanitize_input_module
 from mods import formatting_module
 from mods import mongo_module
-from shapely.geometry import Point as xpoint
-from shapely.geometry import Polygon
 
 
 def init():
@@ -31,7 +31,6 @@ def partner_create(request):
 
     id = sanitize_input_module.entry_clean(request.json['id'])
     trading_name = sanitize_input_module.entry_clean(request.json['tradingName'])
-    print(trading_name)
     owner_name = sanitize_input_module.entry_clean(request.json['ownerName'])
     document = sanitize_input_module.entry_clean(request.json['document'])
     coverageArea = request.json['coverageArea']
@@ -44,7 +43,7 @@ def partner_create(request):
         "coverageArea": MultiPolygon(coverageArea['coordinates']),
         "address": Point(address['coordinates'])
     }
-    #mongo_module.mongo_insert(partner)
+    mongo_module.mongo_insert(partner)
     output, code = '200', 200
     return formatting_module.output_format(output), code
 
