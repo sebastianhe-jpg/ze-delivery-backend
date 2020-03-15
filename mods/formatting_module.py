@@ -8,9 +8,9 @@ format module
 def output_format(description, data=None, errors=None):
     """
     generic output function
-    :param description: general output msg
-    :param errors: if true, return data as errors
-    :param data: additional data for output
+    :param description: string general output msg
+    :param errors: boolean if true, return data as errors
+    :param data: string/array/dict additional data for output
     :return:
     """
     outout = {

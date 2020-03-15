@@ -8,9 +8,10 @@ generic validation module for flask calls.
 def validate_keys(request, expected, key_datatype=None):
     """
     validate input json keys
-    :param request:
-    :param expected:
-    :return: true; false
+    :param request: json input
+    :param expected: array of keys expected on request
+    :param key_datatype: dict of key: datatype to be validated
+    :return: if invalid return true; false
     """
     invalid = False
     heads = [elem for elem in request.json.keys()]
