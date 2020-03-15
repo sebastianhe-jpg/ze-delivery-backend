@@ -15,6 +15,7 @@ to run it you can click on:
 and follow the steps.
 
 Otherwise if you are still reading this, let me tell you a little bit more about the project. 
+
 this repo reponses to [this Backend Challenge](https://github.com/ZXVentures/ze-code-challenges/blob/master/backend.md) 
 
 The application is running in Python 3.6.7 and uses the web microframework and uses (at the moment) no-sql db MongoDB
