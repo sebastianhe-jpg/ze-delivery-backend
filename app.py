@@ -11,6 +11,11 @@ from views import partners_view
 from mods.decorator_module import exception_message
 APP = Flask(__name__)
 
+from mods import mongo_module
+
+a = mongo_module.mongo_connect()
+a.create_index("document", unique=True)
+
 
 # --------------- partners ---------------
 @APP.route('/partner-create', methods=['POST'])

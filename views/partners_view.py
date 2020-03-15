@@ -43,8 +43,13 @@ def partner_create(request):
         "coverageArea": MultiPolygon(coverageArea['coordinates']),
         "address": Point(address['coordinates'])
     }
-    mongo_module.mongo_insert(partner)
-    output, code = '200', 200
+    try:
+        mongo_module.mongo_insert(partner)
+        output = 'sucesfully created'
+        code = 201
+    except Exception as err:
+        output = str(err)
+        code = 409
     return formatting_module.output_format(output), code
 
 
@@ -59,9 +64,14 @@ def partner_get(request):
         return formatting_module.output_format(invalid, reason), 415
     id = sanitize_input_module.entry_clean(request.json['id'])
     id = {"id": id}
-    document = mongo_module.mongo_find(id, single=True)
-    output = 'partner' if document else 'No data match'
-    code = 200
+    try:
+        document = mongo_module.mongo_find(id, single=True)
+        output = 'partner' if document else 'No data match'
+        code = 200 if document else 204
+    except Exception as err:
+        document = None
+        output = str(err)
+        code = 400
     return formatting_module.output_format(output, document), code
 
 
@@ -79,10 +89,15 @@ def partner_search(request):
     lng = sanitize_input_module.entry_clean(request.json['lng'])
     lat = sanitize_input_module.entry_clean(request.json['lat'])
 
-    partners_data = mongo_module.mongo_find({})
-    closest = find_closest_partner(lng, lat, partners_data) if partners_data else None
-    output = 'nearest partner' if partners_data else 'No data match'
-    code = 200
+    try:
+        partners_data = mongo_module.mongo_find({})
+        closest = find_closest_partner(lng, lat, partners_data) if partners_data else None
+        output = 'nearest partner' if partners_data else 'No data match'
+        code = 200 if partners_data else 204
+    except Exception as err:
+        closest = None
+        output = str(err)
+        code = 400
     return formatting_module.output_format(output, closest), code
 
 
