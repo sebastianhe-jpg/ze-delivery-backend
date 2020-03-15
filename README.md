@@ -64,7 +64,15 @@ and the console should print something like this
 ```
 Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 ```
-then [Check api documentation] in the beginning
+then [Check api documentation] in the beginning 
+note that for local running you should change the url from
+```
+https://ze-delivery-backend.herokuapp.com/
+```
+to
+```
+localhost:5000/
+``` 
 
 
 ## Authors
