@@ -20,8 +20,8 @@ def init():
 
 def partner_create(request):
     """
-
-    :param request:
+    validate input json, clean xss entry, insert document on db
+    :param request: json
     :return:
     """
     invalid, reason = input_validator_module.validate_keys(request, ['id', 'tradingName', 'ownerName',
@@ -50,8 +50,8 @@ def partner_create(request):
 
 def partner_get(request):
     """
-
-    :param request:
+    validate input json, clean xss entry, search data on db
+    :param request: json
     :return:
     """
     invalid, reason = input_validator_module.validate_keys(request, ['id'], {"id": int})
@@ -59,40 +59,53 @@ def partner_get(request):
         return formatting_module.output_format(invalid, reason), 415
     id = sanitize_input_module.entry_clean(request.json['id'])
     id = {"id": id}
-    a = mongo_module.mongo_find(id, single=True)
-    output, code = '200', 200
-    return formatting_module.output_format(output,a), code
+    document = mongo_module.mongo_find(id, single=True)
+    output = 'partner' if document else 'No data match'
+    code = 200
+    return formatting_module.output_format(output, document), code
 
 
 def partner_search(request):
     """
-
-    :param request:
+    validate input json, clean xss entry, search data on db.
+    then call find_closest partner function
+    :param request: json
     :return:
     """
-    invalid, reason = input_validator_module.validate_keys(request, ['lng', 'lat'], {'lng': int, 'lat': int})
+    invalid, reason = input_validator_module.validate_keys(request, ['lng', 'lat'], {'lng': float, 'lat': float})
     if invalid:
         return formatting_module.output_format(invalid, reason), 415
+
     lng = sanitize_input_module.entry_clean(request.json['lng'])
     lat = sanitize_input_module.entry_clean(request.json['lat'])
-    partners_data = mongo_module.mongo_find({})
 
-    output, code = '200', 200
-    closest = find_closest_partner(lng, lat, partners_data)
+    partners_data = mongo_module.mongo_find({})
+    closest = find_closest_partner(lng, lat, partners_data) if partners_data else None
+    output = 'nearest partner' if partners_data else 'No data match'
+    code = 200
     return formatting_module.output_format(output, closest), code
 
 
 def find_closest_partner(lng, lat, partners_data):
+    """
+    set point from lnt, lat. iter over documents from partners_data and get distancec fron point.
+    finally get min distance fron partners_data and return lower value
+    :param lng: double.
+    :param lat: double
+    :param partners_data: array of objects
+    :return:
+    """
     point = xpoint(lng, lat)
     distance = {}
     for partner in partners_data:
-        for coordinates_array in partner['coverageArea']['coordinates']:
-            for coordinates in coordinates_array:
-                if partner['id'] in distance:
-                    dist = distance[partner['id']]
-                    dist.append(point.distance(Polygon(coordinates)))
-                    distance[partner['id']] = dist
-                else:
-                    distance[partner['id']] = [point.distance(Polygon(coordinates))]
+        if 'coverageArea' in partner and 'coordinates' in partner['coverageArea']:
+            for coordinates_array in partner['coverageArea']['coordinates']:
+                for coordinates in coordinates_array:
+                    if partner['id'] in distance:
+                        dist = distance[partner['id']]
+                        dist.append(point.distance(Polygon(coordinates)))
+                        distance[partner['id']] = dist
+                    else:
+                        distance[partner['id']] = [point.distance(Polygon(coordinates))]
     key = min(distance, key=distance.get)
     return next((partner for partner in partners_data if partner['id'] == key), None)
