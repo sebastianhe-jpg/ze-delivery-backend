@@ -6,6 +6,7 @@ Backend Challenge Python 3.6.7 REST project
 
 The service is already running and working on heroku and if you are feeling anxious and can not wait to see the amazing magic of an ApiREST with your own eyes.
 you can [Check api documentation here](https://documenter.getpostman.com/view/10728918/SzS2x8Pz?version=latest#131a6529-7529-4444-81e8-92cdf5c7ef2b).
+
 it would be better if you have [postman](https://dl.pstmn.io/download/latest/osx) installed.
 to run it you can click on: 
 
@@ -17,8 +18,11 @@ Otherwise if you are still reading this, let me tell you a little bit more about
 this repo reponses to [this Backend Challenge](https://github.com/ZXVentures/ze-code-challenges/blob/master/backend.md) 
 
 The application is running in Python 3.6.7 and uses the web microframework and uses (at the moment) no-sql db MongoDB
-[Download Python 3.6.7](https://www.python.org/downloads/release/python-367/) 
-[Download Flask](https://www.python.org/downloads/release/python-367/) 
+
+[Download Python 3.6.7](https://www.python.org/downloads/release/python-367/)
+ 
+[Download Flask](https://www.python.org/downloads/release/python-367/)
+ 
 [Create MongoDb account](https://www.mongodb.com/)
 
 
