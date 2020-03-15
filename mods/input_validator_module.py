@@ -5,7 +5,7 @@ generic validation module for flask calls.
 """
 
 
-def validate_keys(request, expected, childs=None):
+def validate_keys(request, expected, key_datatype=None):
     """
     validate input json keys
     :param request:
@@ -14,13 +14,15 @@ def validate_keys(request, expected, childs=None):
     """
     invalid = False
     heads = [elem for elem in request.json.keys()]
-
+    reason = None
     if not all(elem in heads for elem in expected):
         invalid = True
+        reason = "keys missing on request"
+    else:
+        if key_datatype:
+            for key, value in key_datatype.items():
+                if not isinstance(request.json[key], value):
+                    invalid = True
+                    reason = "incorrect datatype"
 
-    if childs:
-        for kname in childs.keys():
-            heads = [elem for elem in request.json[kname]]
-            if not all(elem in heads for elem in childs[kname]):
-                invalid = True
-    return invalid
+    return invalid, reason

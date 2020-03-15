@@ -21,6 +21,8 @@ def output_format(description, data=None, errors=None):
     elif data:
         if isinstance(data, (str, int, bool, float)):
             outout.update({"description": data})
-        elif isinstance(data, (list, dict)):
+        elif isinstance(data, dict):
             outout.update(data)
+        else:
+            outout.update({"data":data})
     return outout
