@@ -55,7 +55,6 @@ class XssCleaner:
 def entry_clean(input_data):
     """
     clean json values from malicious code
-    TODO: implement data
     :param input_data:
     :return:
     """
