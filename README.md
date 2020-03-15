@@ -8,7 +8,9 @@ The service is already running and working on heroku and if you are feeling anxi
 you can [Check api documentation here](https://documenter.getpostman.com/view/10728918/SzS2x8Pz?version=latest#131a6529-7529-4444-81e8-92cdf5c7ef2b).
 it would be better if you have [postman](https://dl.pstmn.io/download/latest/osx) installed.
 to run it you can click on: 
+
 ![asdf](https://github.com/sebastianhe-jpg/ze-delivery-backend/blob/develop/img.png "downdload ")
+
 and follow the steps.
 
 Otherwise if you are still reading this, let me tell you a little bit more about the project. 
