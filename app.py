@@ -12,6 +12,7 @@ from mods.decorator_module import exception_message
 APP = Flask(__name__)
 
 
+# --------------- partners ---------------
 @APP.route('/partner-create', methods=['POST'])
 @exception_message
 @cross_origin(cross_origin='*')
