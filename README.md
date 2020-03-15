@@ -27,7 +27,6 @@ The application is running in Python 3.6.7 and uses the web microframework and u
 [Create MongoDb account](https://www.mongodb.com/)
 
 
-
 ## Deployment
 
 on the terminal of your local machine write
@@ -51,7 +50,7 @@ vi .env
 inside the .env file write the following
 (note that you should create the mongo collection first and get the mongourl from there)
 ```
-LOCAL_PATH = './'
+LOCAL_PATH = ''
 
 MONGO_URL = ''
 MONGO_DB = 'ze-delivery'
@@ -66,6 +65,7 @@ and the console should print something like this
 Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 ```
 then [Check api documentation] in the beginning
+
 
 ## Authors
 * **Sebastian He** - *Initial work* - [sebastianhe-jpg](https://github.com/sebastianhe-jpg)
