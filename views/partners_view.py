@@ -31,7 +31,9 @@ def partner_create(request):
                                                            ['id', 'tradingName', 'ownerName',
                                                             'document', 'coverageArea',
                                                             'address'],
-                                                           {"id": int})
+                                                           {"id": int},
+                                                           required=True
+                                                           )
     if invalid:
         return formatting_module.output_format(reason), 415
 
@@ -49,6 +51,7 @@ def partner_create(request):
         "coverageArea": MultiPolygon(coverage_area['coordinates']),
         "address": Point(address['coordinates'])
     }
+
     try:
         mongo_module.mongo_insert(partner)
         output = 'sucesfully created'
