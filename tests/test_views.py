@@ -59,8 +59,8 @@ class TestViews(unittest.TestCase):
         partners_data = self.partners_data
         nearest_partner = partners_view.find_closest_partner(input_lng, input_lat, partners_data)
 
-        assert isinstance(nearest_partner, dict)
-        assert nearest_partner['id'] == 3
+        self.assertIsInstance(nearest_partner, dict)
+        self.assertEqual(nearest_partner['id'],3)
 
 
 if __name__ == '__main__':

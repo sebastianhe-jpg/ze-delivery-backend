@@ -35,8 +35,8 @@ class TestModules(unittest.TestCase):
         input_script = "<script> alert() </script> testing"
         clean_input1 = sanitize_input_module.entry_clean(input_string)
         clean_input2 = sanitize_input_module.entry_clean(input_script)
-        assert input_string == clean_input1
-        assert input_script != clean_input2
+        self.assertEquals(input_string, clean_input1)
+        self.assertNotEquals(input_script, clean_input2)
 
     @print_test_time_elapsed
     def test_module_input_validator(self):
@@ -45,9 +45,8 @@ class TestModules(unittest.TestCase):
         """
         input_request = self.testClass
         invalid, reason = input_validator_module.validate_keys(input_request, ["string"], {"string": str, "integer": int})
-
-        assert invalid == False
-        assert reason is None
+        self.assertIs(invalid, False)
+        self.assertIs(reason, None)
 
     @print_test_time_elapsed
     def test_module_formatting(self):
@@ -57,8 +56,8 @@ class TestModules(unittest.TestCase):
         input_text = "output text"
         input_data = {"data": "to show"}
         output_text = formatting_module.output_format(input_text, input_data)
-        assert output_text['message'] == input_text
-        assert output_text['data'] == "to show"
+        self.assertEqual(output_text['message'], input_text)
+        self.assertEqual(output_text['data'], "to show")
 
 
 if __name__ == '__main__':

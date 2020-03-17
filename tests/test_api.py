@@ -15,7 +15,7 @@ class MyTestCase(unittest.TestCase):
     @print_test_time_elapsed
     def test_home(self):
         result = self.app.get('/')
-        assert result.status_code == 200
+        self.assertEqual(result.status_code, 200)
 
 
 if __name__ == '__main__':
