@@ -1,0 +1,2 @@
+# to run test excecute on project root folder the following command
+nose2
