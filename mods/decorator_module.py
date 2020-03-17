@@ -16,9 +16,10 @@ def exception_message(function):
     def wrapper(*args, **kwargs):
         try:
             return function(*args, **kwargs)
-        except Exception as e:
-            err = """There was an issue with the function %s, We're sorry, we got an issue right now,
+        except Exception as error:
+            err = """There was an issue with the function %s,
+            We're sorry, we got an issue right now,
             please try later.""" % function.__name__
-            return jsonify(formatting_module.output_format(err, str(e), errors=True)), 415
+            return jsonify(formatting_module.output_format(err, str(error), errors=True)), 415
     wrapper.__name__ = function.__name__
     return wrapper

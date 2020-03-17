@@ -7,7 +7,11 @@ import unittest
 from .utils import print_test_time_elapsed
 import app
 
-class MyTestCase(unittest.TestCase):
+
+class TestApi(unittest.TestCase):
+    """
+    api class for unit test
+    """
     def setUp(self):
         app.APP.testing = True
         self.app = app.APP.test_client()

@@ -3,10 +3,10 @@
 """
 Mongo connection module
 """
+import pymongo
 from .config import MONGO_URL
 from .config import MONGO_DB
 from .config import MONGO_COL
-import pymongo
 
 
 def mongo_connect(collection=None):

@@ -14,7 +14,7 @@ def validate_keys(request, expected, key_datatype=None):
     :return: if invalid return true; false
     """
     invalid = False
-    heads = [elem for elem in request.json.keys()]
+    heads = request.json.keys()
     reason = None
     if not all(elem in heads for elem in expected):
         invalid = True
