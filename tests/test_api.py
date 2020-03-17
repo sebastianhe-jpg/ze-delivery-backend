@@ -9,8 +9,8 @@ import app
 
 class MyTestCase(unittest.TestCase):
     def setUp(self):
-        app.app.testing = True
-        self.app = app.app.test_client()
+        app.APP.testing = True
+        self.app = app.APP.test_client()
 
     @print_test_time_elapsed
     def test_home(self):
