@@ -4,8 +4,8 @@
 unit test to check if flask is running properly on server
 """
 import unittest
-from .utils import print_test_time_elapsed
 import app
+from .utils import print_test_time_elapsed
 
 
 class TestApi(unittest.TestCase):
@@ -18,6 +18,10 @@ class TestApi(unittest.TestCase):
 
     @print_test_time_elapsed
     def test_home(self):
+        """
+        test root flask response
+        :return:
+        """
         result = self.app.get('/')
         self.assertEqual(result.status_code, 200)
 
